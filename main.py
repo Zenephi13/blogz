@@ -275,14 +275,15 @@ class LoginHandler(BlogHandler):
 
         # get the user from the database
         user = self.get_user_by_name(submitted_username)
+        error = ("Username and Password do not match.")
 
         if not user:
-            self.render_login_form(error="Invalid username")
+            self.render_login_form(error=error)
         elif hashutils.valid_pw(submitted_username, submitted_password, user.pw_hash):
             self.login_user(user)
             self.redirect('/blog/newpost')
         else:
-            self.render_login_form(error="Invalid password")
+            self.render_login_form(error=error)
 
 class LogoutHandler(BlogHandler):
 
