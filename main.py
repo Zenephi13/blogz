@@ -158,7 +158,7 @@ class ViewPostHandler(BlogHandler):
             t = jinja_env.get_template("post.html")
             response = t.render(post=post)
         else:
-            error = "there is no post with id %s" % id
+            error = "There is no post with id %s" % id
             t = jinja_env.get_template("404.html")
             response = t.render(error=error)
 
@@ -264,8 +264,8 @@ class LoginHandler(BlogHandler):
     def render_login_form(self, error=""):
         """ Render the login form with or without an error, based on parameters """
         t = jinja_env.get_template("login.html")
-        response = t.render(error=error)
-        self.response.out.write(response)
+        content = t.render(error=error)
+        self.response.out.write(content)
 
     def get(self):
         self.render_login_form()
@@ -290,7 +290,7 @@ class LogoutHandler(BlogHandler):
 
     def get(self):
         self.logout_user()
-        self.redirect('/blog')
+        self.redirect('/')
 
 app = webapp2.WSGIApplication([
     ('/', IndexHandler),
